@@ -19,3 +19,14 @@ DETALHE 1: NÃO ESQUEÇA DOS TRATAMENTOS COM REQUIRED E UNIQUE. OBSERVE SE SÃO 
 4 - Criando type para URL da página. 
 . O tipo usado é o de UID.
 .fica atrelado ao title, por ex. Sempre que o title muda ele muda também. 
+
+5- Crie components que serão inseridos na landing page. 
+
+6- RegExp pattern:
+Expressão regular. (fazer curso gratuito no youtube)
+^[a-zA-Z] + ([0-9-]*[a-zA-Z]+)*$
+^[OPrimeiroAlgarismoDeveComeçarComLetraMaiscOuMinusc] + ([OsAlgarismosDevemSerNumerosEUmTraço]) * [OsalgarismosDevemSerLetras] +)*$
+^ = precede uma regra para a letra inicial 
++ = une o campo anterior com o próximo
+* torna o campo anterior opcional 
+
