@@ -1,61 +1,9 @@
-1 - Por que usar Cloudinary?
+Entendendo as funcionalidades do strapi. 
 
-.Iremos utilizar o heroku pra hospedar nosso site gratuitamente, no entanto, ele tem como premissa desligar o dyno(server) e quanto é reiniciado ele zera os dados salvos, apagando a pasta uploads do strapi.
+1 - Collection Types: Lista de coisas. 
+Lista de usuário, de autores etc. Utilizado para criar lista de vários elementos. 
 
-.Para não perder essas imagens utilizaremos uns CDN (Content Delivery Network), presente no AWS, heroku (de forma paga), mas de forma gratuita. 
+2 - Single Types: Tipo único. 
+Utilizado pra a criação de uma landing page e dentro dela estarão vários componentes. Uma landing page (single type) pode utilizar em seus componentes dados das collection types. Ex: Um post(componente da landing page) tem 10 autores. Esses autores vêm das collection types já com nome, idade e profissão. 
 
-2 - Como fazer o strapi salvar as imagens em outro servidor?
-
-.Strapi-provider-iploado-cloudinary
-https://strapi.io/blog/add-cloudinary-support-to-your-strapi-application
-.install provider: yarn add @strapi/provider-upload-cloudinary
-
-3 - Adicione esta configuração 
-
-Provider Configuration a ./config/plugins.js
-
-module.exports = ({ env }) => ({
-  // ...
-  upload: {
-    config: {
-      provider: 'cloudinary',
-      providerOptions: {
-        cloud_name: env('CLOUDINARY_NAME'),
-        api_key: env('CLOUDINARY_KEY'),
-        api_secret: env('CLOUDINARY_SECRET'),
-      },
-      actionOptions: {
-        upload: {},
-        uploadStream: {},
-        delete: {},
-      },
-    },
-  },
-  // ...
-});
-
-4 - Crie uma conta no Cloudinary e pegue os dados do server
-pnnogde@gmail.com(sign up google)
-
-5 - Substitua strapi::security em ./config/middlewares.js pelo objeto:
-
-module.exports = [
-  // ...
-  {
-    name: 'strapi::security',
-    config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          'connect-src': ["'self'", 'https:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
-          'media-src': ["'self'", 'data:', 'blob:', 'dl.airtable.com', 'res.cloudinary.com'],
-          upgradeInsecureRequests: null,
-        },
-      },
-    },
-  },
-  // ...
-]
-
-6 - Agora as imagens que subimos no strapi irão para nosso server cloudinary
+Neste caso, como criaremos várias landing pages adminstradas pelo strapi, ela pertencerá as collection types. 
