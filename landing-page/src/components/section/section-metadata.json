@@ -1,7 +1,8 @@
 {
   "collectionName": "components_section_section_metadata",
   "info": {
-    "displayName": "section-metadata"
+    "displayName": "section-metadata",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,10 +12,10 @@
       "maxLength": 255,
       "minLength": 3
     },
-    "sectin_id": {
+    "section_id": {
       "type": "string",
       "required": true,
-      "regex": "^[a-zA-Z] + ([0-9-]*[a-zA-Z]+)*$"
+      "regex": "^[a-zA-Z]+([0-9-]*[a-zA-Z]+)*$"
     },
     "background": {
       "type": "boolean",

@@ -1,32 +1,13 @@
-Entendendo as funcionalidades do strapi. 
+1 - Como funciona? 
 
-1 - Collection Types: Lista de coisas. 
-.Lista de usuário, de autores etc. Utilizado para criar lista de vários elementos. 
+.DynamicZone é um tipo de campo onde o conteúdo é variável. 
+Por exemplo: Se adicionamos uma dynamic Zone chamada section, podemos criar vários components de sections. Section-one-collumn Section-two-collumns Section-one-collumn-one-image
 
-2 - Single Types: Tipo único. 
-.Utilizado pra a criação de uma landing page e dentro dela estarão vários componentes. Uma landing page (single type) pode utilizar em seus componentes dados das collection types. Ex: Um post(componente da landing page) tem 10 autores. Esses autores vêm das collection types já com nome, idade e profissão. 
-
-.Neste caso, como criaremos várias landing pages adminstradas pelo strapi, ela pertencerá as collection types. 
+.Desta forma, o usuário pode optar por qual tipo de components irá adicionar. 
 
 
-3 - Criando uma collection type
-.Em display name, o nome irá no singular. O strapi criará uma versão plural. 
-.Em advanced settings, o sistema de draft serve como segurança para salvar rascunhos. 
-.Crie seus components
+2 - Collumn grid
+.Criamos todos os components que usaremos e adicionamos indiviualmente na dynamic zone. 
+.Quando selecionarmos nossa dynamic zone, usamos só o que queremos. Ex: Se essa section tem title, description e img usamos esses e deixamos os cards de texto de fora. Se for o contrário, usamos title e description do card de texto e deixamos o resto de fora. 
 
-DETALHE 1: NÃO ESQUEÇA DOS TRATAMENTOS COM REQUIRED E UNIQUE. OBSERVE SE SÃO NECESSÁRIOS E PREENCHA.
-
-4 - Criando type para URL da página. 
-. O tipo usado é o de UID.
-.fica atrelado ao title, por ex. Sempre que o title muda ele muda também. 
-
-5- Crie components que serão inseridos na landing page. 
-
-6- RegExp pattern:
-Expressão regular. (fazer curso gratuito no youtube)
-^[a-zA-Z] + ([0-9-]*[a-zA-Z]+)*$
-^[OPrimeiroAlgarismoDeveComeçarComLetraMaiscOuMinusc] + ([OsAlgarismosDevemSerNumerosEUmTraço]) * [OsalgarismosDevemSerLetras] +)*$
-^ = precede uma regra para a letra inicial 
-+ = une o campo anterior com o próximo
-* torna o campo anterior opcional 
 

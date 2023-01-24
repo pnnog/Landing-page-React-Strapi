@@ -4,7 +4,8 @@
   "info": {
     "singularName": "page",
     "pluralName": "pages",
-    "displayName": "page"
+    "displayName": "page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -19,6 +20,14 @@
     "slug": {
       "type": "uid",
       "targetField": "title",
+      "required": true
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "section.section-two-collumns",
+        "section.section-grid"
+      ],
       "required": true
     }
   }
