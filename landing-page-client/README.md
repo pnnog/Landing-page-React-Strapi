@@ -1,112 +1,64 @@
-Configurando o projeto com React, Eslint, Prettier e Editorconfig
+Instalando e configurando styled components (inicial)
 
-1 - Crie o projeto (já dentro da pasta)
- yarn create react-app .
+1 -  Instalar
+yarn add styled-components
 
-2 - Instale os plugins restantes (eslint + prettier)
- yarn add -D prettier eslint eslint-config-prettier eslint-plugin-prettier
+2 - Crie um arquivo styles.js na pasta de todo componente que for estilizar
 
-3- Configure Prettier e Eslint com as seguintes configurações
+3 - No arquivo style.js
+Import styled from 'styled-components'
 
-----ESLINTRC--------
-autoconfig: yarn eslint --init
+export const nomeDoComponenteDeEstilo = styled.tag`
 
-.eslintrc.js
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    jest: true,
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended',
-  ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  parser: '@babel/eslint-parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  },
-  plugins: ['react', 'prettier', 'react-hooks'],
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-  },
-};
+<configurações do css>
 
------PRETTIER------
+`
 
-.prettierrc.js
+tag pode ser qualquer tag.. div, section, menu, p etc.
 
-module.exports = {
-  arrowParens: 'always',
-  bracketSpacing: true,
-  endOfLine: 'lf',
-  htmlWhitespaceSensitivity: 'ignore',
-  insertPragma: false,
-  jsxSingleQuote: false,
-  printWidth: 80,
-  proseWrap: 'always',
-  quoteProps: 'as-needed',
-  requirePragma: false,
-  semi: true,
-  singleQuote: true,
-  tabWidth: 2,
-  trailingComma: 'all',
-  useTabs: false,
-  vueIndentScriptAndStyle: false,
-  embeddedLanguageFormatting: 'off',
-};
+4 -  Para utilizar este componente de estilo seguiremos o seguinte padrão
 
------BABEL------
+No arquivo jsx vamos importar tudo que está no styles.js
+Import * as Styled from './styles.js
 
-.babelrc
+E envolver nossas tags com esse componente.
 
-{
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
-    "plugins": ["@babel/plugin-proposal-optional-chaining"]
-}
+Ex:
+Import * as Styled fomm './styles.js'
+return(
+  <Styled.Wrapper>
+    <h1> Hello World </h1>
+  </Styled.Wrapper>
+)
 
+Por ser um componente react podemos passar props
 
-4 - Crie um arquivo .editorconfig no VsCode com o botão direito do mouse com  a seguinte configuração:
+ <Styled.Wrapper background='blue'>
 
-root = true
+E no arquivo styles.js receberemos essas props da seguinte forma:
+  4.1 Importa o {css} do styled-components
+  4.2 Abre chaves para passa js e cria uma função anônima que recebe props e retorna css
 
-[*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
+import styled, { css } from 'styled-components';
 
-5 - Organizando pastas
+export const Wrapper = styled.div`
+  ${(props) => css`
+    background: ${props.background};
+    color: ${props.color}
+  `}
+`;
 
-Criar
-src > components
-src > components > templates > App
-src > styles (p/ estilos globais)
+Dessa forma podemos controlar o estilo pelo js.
 
-Apagar
-WebVitals
-Arquivos CSS pois usaremos styled components
-logo.svg
+5 -  Criando estilo global com styled components.
 
-Mover
-Mova todos arquivos de App para a pasta App e renomeie de acordo(index.. etc)
+5.1 Na pasta styles da raiz do projeto, crie o global-styles.js e importe o {createGlobalStyle} do styled components.
 
+5.2 Aplica o estilo no index.js da aplicação.
+Obs: Neste caso, não envolva o index. Apenas chame o componente no arquivo e retorne.
 
+ex de como retornar
+<React.StrictMode>
+  <GlobalStyles />
+  <Home/>
+<React.StrictMode/>
