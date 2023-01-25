@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
+import { renderTheme } from '../../styles/render-theme';
 import Home from '.';
+import { screen } from '@testing-library/react';
+import { theme } from '../../styles/theme';
 
-test('renders learn react link', () => {
-  render(<Home />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('should have background blue', () => {
+  const { debug } = renderTheme(<Home />);
+  //Testando se o componente pai do heading que contém 'Hello World' está na tela
+  const headingContainer = screen.getByRole('heading', {
+    name: 'Hello World',
+  }).parentElement;
+
+  expect(headingContainer).toHaveStyle({
+    background: theme.backgroundColor.home,
+  });
+  debug();
 });

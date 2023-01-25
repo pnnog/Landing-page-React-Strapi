@@ -3,7 +3,8 @@ export const theme = {
   secondary: 'blue',
 
   backgroundColor: {
-    main: 'purple',
-    footer: 'black',
+    main: 'blue',
+    home: 'black',
+    footer: 'purple',
   },
 };

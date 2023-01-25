@@ -1,30 +1,50 @@
-Criando um tema para aplicação
+Testando componentes
 
-1 - Importe o {ThemeProvider} styled-components no index da aplicação
-2 - Envolva a aplicação toda
-3 - Crie o arquivo theme.js em styles e crie os themas em formato de objeto. exporte
-4- importe o tema
-5 -  passe o tema como props
-6 -  Receba o tema no componente de estilo através de props com uma função anônima.
+1 - Home
+.No primeiro momento, o jest está renderizando a home desconsiderando que ela está incluída no contexto do ThemeProvider. Desta forma não é possível testar as props (estilos) que theme provider passa Home.
 
-ex:
+1.1 - Para solucionar isso, criamos uma função que renderiza Home dentro do theme provider.
 
-Exportando theme
+styles > render-theme.js
 
-export const theme = {
-  primary: 'red',
-
-  backgroundColor: {
-    main: 'purple',
-  },
+export const renderTheme = (children) => {
+  return render(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
 };
 
-Utilizando tema
 
- body{
-    ${({ theme }) => css`
-    color:${theme.primary};
-    background:${theme.backgroundColor.main};
-    font-family:sans-serif;
-    `}
-  }
+1.2 - Importe a função de renderização no arquivo de teste, e renderize novamente.
+
+1.3 Testando se o componente pai do heading que contém 'Hello World' está na tela
+
+test('renders learn react link', () => {
+  const { debug } = renderTheme(<Home />);
+
+  const headingContainer = screen.getByRole('heading', {
+    name: 'Hello World',
+  }).parentElement;
+});
+
+1.4 Testando o estilo desse headingContainer
+
+test('renders learn react link', () => {
+  const { debug } = renderTheme(<Home />);
+
+  const headingContainer = screen.getByRole('heading', {
+    name: 'Hello World',
+  }).parentElement;
+
+  expect(headingContainer).toHaveStyle({
+    background: theme.backgroundColor.home,
+  });
+});
+
+
+2 -  Plugin de testes para styled components
+
+yarn add -D jest-styled-components
+
+2.1 - Import
+Para não precisar importar em cada teste, importe o plugin no SetupTests.js
+
+
+
