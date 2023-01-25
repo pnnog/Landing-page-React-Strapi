@@ -1,64 +1,30 @@
-Instalando e configurando styled components (inicial)
+Criando um tema para aplicação
 
-1 -  Instalar
-yarn add styled-components
+1 - Importe o {ThemeProvider} styled-components no index da aplicação
+2 - Envolva a aplicação toda
+3 - Crie o arquivo theme.js em styles e crie os themas em formato de objeto. exporte
+4- importe o tema
+5 -  passe o tema como props
+6 -  Receba o tema no componente de estilo através de props com uma função anônima.
 
-2 - Crie um arquivo styles.js na pasta de todo componente que for estilizar
+ex:
 
-3 - No arquivo style.js
-Import styled from 'styled-components'
+Exportando theme
 
-export const nomeDoComponenteDeEstilo = styled.tag`
+export const theme = {
+  primary: 'red',
 
-<configurações do css>
+  backgroundColor: {
+    main: 'purple',
+  },
+};
 
-`
+Utilizando tema
 
-tag pode ser qualquer tag.. div, section, menu, p etc.
-
-4 -  Para utilizar este componente de estilo seguiremos o seguinte padrão
-
-No arquivo jsx vamos importar tudo que está no styles.js
-Import * as Styled from './styles.js
-
-E envolver nossas tags com esse componente.
-
-Ex:
-Import * as Styled fomm './styles.js'
-return(
-  <Styled.Wrapper>
-    <h1> Hello World </h1>
-  </Styled.Wrapper>
-)
-
-Por ser um componente react podemos passar props
-
- <Styled.Wrapper background='blue'>
-
-E no arquivo styles.js receberemos essas props da seguinte forma:
-  4.1 Importa o {css} do styled-components
-  4.2 Abre chaves para passa js e cria uma função anônima que recebe props e retorna css
-
-import styled, { css } from 'styled-components';
-
-export const Wrapper = styled.div`
-  ${(props) => css`
-    background: ${props.background};
-    color: ${props.color}
-  `}
-`;
-
-Dessa forma podemos controlar o estilo pelo js.
-
-5 -  Criando estilo global com styled components.
-
-5.1 Na pasta styles da raiz do projeto, crie o global-styles.js e importe o {createGlobalStyle} do styled components.
-
-5.2 Aplica o estilo no index.js da aplicação.
-Obs: Neste caso, não envolva o index. Apenas chame o componente no arquivo e retorne.
-
-ex de como retornar
-<React.StrictMode>
-  <GlobalStyles />
-  <Home/>
-<React.StrictMode/>
+ body{
+    ${({ theme }) => css`
+    color:${theme.primary};
+    background:${theme.backgroundColor.main};
+    font-family:sans-serif;
+    `}
+  }
